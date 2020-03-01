@@ -4,6 +4,7 @@ from keras.utils import to_categorical
 
 from model import ELM
 
+
 def main():
     num_classes = 10
     num_hidden_layers = 1024
@@ -20,9 +21,9 @@ def main():
     y_train = to_categorical(y_train, num_classes).astype(np.float32)
     y_test = to_categorical(y_test, num_classes).astype(np.float32)
 
-    #create instance of our model
+    # create instance of our model
     model = ELM(
-        28**2,
+        28 ** 2,
         num_hidden_layers,
         num_classes
     )
@@ -37,6 +38,7 @@ def main():
     val_loss, val_acc = model.evaluate(x_test, y_test)
     print('val loss: %f' % val_loss)
     print('val acc: %f' % val_acc)
+
 
 if __name__ == '__main__':
     main()
