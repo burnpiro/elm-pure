@@ -30,6 +30,9 @@ You can also change `activation` and `loss` function just pass:
 - `activation` - `sigmoid`, `fourier`, `hardlimit`
 - `loss` - `mse` (mean square error), `mae` (mean absolute error)
 
+### Important
+Watch out for computation complexity. Each time you try to __fit__ the model it has to do expensive matrix inversion [Moore–Penrose inverse](https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse). MNIST dataset has 60k images (__H__ matrix has size of __60000x1024__) and takes around 8.5s to inverse on i7-7820X CPU. Remember about it when changing dataset or number of hidden layers
+
 ## Todo
 - Implement saving/loading model (`h5py`)
 - Implement tests
