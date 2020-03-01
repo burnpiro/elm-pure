@@ -65,9 +65,9 @@ class ELM(object):
         else:
             self._bias = np.zeros(shape=(self._num_hidden_units,))
 
-        print(self._bias)
-        print(self._w)
-        print(self._beta)
+        print('Bias shape:', self._bias.shape)
+        print('W shape:', self._w.shape)
+        print('Beta shape:', self._beta.shape)
 
     def fit(self, X, Y):
         H = self._activation(X.dot(self._w) + self._bias)
@@ -77,7 +77,9 @@ class ELM(object):
 
         self._beta = H_pinv.dot(Y)
 
-    def call(self, X):
+        print('Fit Beta shape:', self._beta.shape)
+
+    def __call__(self, X):
         H = self._activation(X.dot(self._w) + self._bias)
         return H.dot(self._beta)
 
