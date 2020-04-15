@@ -1,4 +1,5 @@
 import numpy as np
+import time
 
 
 def _mean_squared_error(y, pred):
@@ -40,7 +41,7 @@ def getLoss(name):
     }[name]
 
 
-class ELM(object):
+class ELM:
     def __init__(self, num_input_nodes, num_hidden_units, num_out_units, activation='sigmoid',
                  loss='mse', beta_init=None, w_init=None, bias_init=None):
         self._num_input_nodes = num_input_nodes
@@ -69,15 +70,20 @@ class ELM(object):
         print('W shape:', self._w.shape)
         print('Beta shape:', self._beta.shape)
 
-    def fit(self, X, Y):
+    def fit(self, X, Y, display_time=False):
         H = self._activation(X.dot(self._w) + self._bias)
 
         # Moore–Penrose pseudo inverse
+        if display_time:
+            start = time.time()
         H_pinv = np.linalg.pinv(H)
+        if display_time:
+            stop = time.time()
+            print(f'Train time: {stop-start}')
 
         self._beta = H_pinv.dot(Y)
 
-        print('Fit Beta shape:', self._beta.shape)
+        # print('Fit Beta shape:', self._beta.shape)
 
     def __call__(self, X):
         H = self._activation(X.dot(self._w) + self._bias)
