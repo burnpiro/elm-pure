@@ -79,11 +79,11 @@ class ELM:
         H_pinv = np.linalg.pinv(H)
         if display_time:
             stop = time.time()
-            print(stop-start)
+            print(f'Train time: {stop-start}')
 
         self._beta = H_pinv.dot(Y)
 
-        print('Fit Beta shape:', self._beta.shape)
+        # print('Fit Beta shape:', self._beta.shape)
 
     def __call__(self, X):
         H = self._activation(X.dot(self._w) + self._bias)
